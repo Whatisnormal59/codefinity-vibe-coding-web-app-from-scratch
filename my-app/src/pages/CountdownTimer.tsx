@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 
 export default function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
+    days: "00",
+    hours: "00",
+    minutes: "00",
+    seconds: "00",
   });
 
   useEffect(() => {
     const targetDate = new Date("August 26, 2025 16:00:00").getTime();
 
-    const interval = setInterval(() => {
+    const updateCountdown = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
 
@@ -22,10 +22,17 @@ export default function CountdownTimer() {
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-      setTimeLeft({ days, hours, minutes, seconds });
-    }, 1000);
+      setTimeLeft({
+        days: days.toString().padStart(2, "0"),
+        hours: hours.toString().padStart(2, "0"),
+        minutes: minutes.toString().padStart(2, "0"),
+        seconds: seconds.toString().padStart(2, "0"),
+      });
+    };
 
-    return () => clearInterval(interval);
+    const intervalId = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (

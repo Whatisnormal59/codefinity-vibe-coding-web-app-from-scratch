@@ -321,10 +321,7 @@ export default function ContactForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -346,18 +343,18 @@ export default function ContactForm() {
         console.error("Form submission failed");
       }
     } catch (error) {
-      console.error("Error submitting form", error);
+      console.error("Error submitting form:", error);
     }
   };
 
   return (
     <section id="contact" className="py-8 px-4">
-      <div className="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
+      <div className="max-w-lg mx-auto">
         <h2 className="text-3xl font-bold text-center mb-6">Contact Us</h2>
         {submitted && (
           <p className="text-green-500 text-center mb-4">Thank you for your message!</p>
         )}
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg shadow-md space-y-4">
           <div>
             <label htmlFor="name" className="block font-semibold mb-2">
               Name
@@ -444,7 +441,7 @@ import { Instagram, Facebook, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-yellow-100 py-6 text-center">
+    <footer className="bg-orange-100 py-6 text-center">
       <p className="text-sm text-gray-500">© 2025 Grill & Chill. All rights reserved.</p>
       <p className="mt-4">Follow us:</p>
       <ul className="flex justify-center space-x-6 mt-2">
@@ -492,31 +489,32 @@ export default function Header() {
     setMenuOpen(!menuOpen);
   };
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
   return (
     <header className="sticky top-0 bg-orange-100 shadow-md py-4">
       <div className="container mx-auto flex justify-between items-center px-4">
         <h1 className="text-2xl font-bold">Grill & Chill</h1>
         <nav className="hidden md:flex space-x-4">
-          <a href="#home" className="hover:underline">Home</a>
-          <a href="#about" className="hover:underline">About</a>
-          <a href="#schedule" className="hover:underline">Schedule</a>
-          <a href="#contact" className="hover:underline">Contact</a>
+          <a href="#home" className="hover:text-orange-500">Home</a>
+          <a href="#about" className="hover:text-orange-500">About</a>
+          <a href="#schedule" className="hover:text-orange-500">Schedule</a>
+          <a href="#contact" className="hover:text-orange-500">Contact</a>
         </nav>
-        <button onClick={toggleMenu} className="md:hidden text-2xl">
+        <button
+          className="md:hidden text-2xl"
+          onClick={toggleMenu}
+        >
           ☰
         </button>
       </div>
       {menuOpen && (
-        <ul className="md:hidden flex flex-col space-y-2 mt-2 px-4">
-          <li><a href="#home" className="hover:underline" onClick={closeMenu}>Home</a></li>
-          <li><a href="#about" className="hover:underline" onClick={closeMenu}>About</a></li>
-          <li><a href="#schedule" className="hover:underline" onClick={closeMenu}>Schedule</a></li>
-          <li><a href="#contact" className="hover:underline" onClick={closeMenu}>Contact</a></li>
-        </ul>
+        <nav className="md:hidden bg-orange-100 shadow-md">
+          <ul className="flex flex-col space-y-2 px-4 py-2">
+            <li><a href="#home" className="hover:text-orange-500">Home</a></li>
+            <li><a href="#about" className="hover:text-orange-500">About</a></li>
+            <li><a href="#schedule" className="hover:text-orange-500">Schedule</a></li>
+            <li><a href="#contact" className="hover:text-orange-500">Contact</a></li>
+          </ul>
+        </nav>
       )}
     </header>
   );
@@ -525,10 +523,10 @@ export default function Header() {
 
 ## File: my-app/src/pages/index.tsx
 ```typescript
+import Header from './Header';
 import ScheduleContent from './ScheduleContent';
 import ContactForm from './ContactForm';
 import Footer from './Footer';
-import Header from './Header';
 import CountdownTimer from './CountdownTimer';
 
 export default function Home() {
@@ -537,45 +535,45 @@ export default function Home() {
       <Header />
       <section
         id="home"
-        className="relative bg-cover bg-center text-center py-8 px-4 flex-col items-center justify-center min-h-screen"
+        className="relative bg-cover bg-center bg-no-repeat text-center py-8 px-4 flex-col items-center justify-center min-h-screen"
         style={{
           backgroundImage: "url('https://content-media-cdn.codefinity.com/courses/125aa555-8e38-4918-bf19-386e1a021074/hero+image.png')",
-          filter: "blur(5px)",
+          filter: "blur(8px)",
         }}
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10">
-          <h1 className="text-[#EA2F14] text-4xl font-bold mb-4">
+          <h1 className="text-3xl font-bold text-[#EA2F14] mb-4">
             Grill & Chill: A Backyard Hangout
           </h1>
           <p className="text-lg mb-2">
             Join us for a relaxing evening with neighbors, food, and fun!
           </p>
-          <p className="text-lg mb-2 bg-[#FFE4B5] text-[#EA2F14] font-bold py-2 px-4 rounded">
+          <p className="text-lg mb-2 bg-[#FFE4C4] text-[#EA2F14] font-semibold py-1 px-2 rounded">
             Oakview Park – Picnic Area B
           </p>
-          <p className="text-lg mb-4 bg-[#FFE4B5] text-[#EA2F14] font-bold py-2 px-4 rounded">
+          <p className="text-lg mb-4 bg-[#FFE4C4] text-[#EA2F14] font-semibold py-1 px-2 rounded">
             Saturday at 4:00 PM
           </p>
           <a
             href="#contact"
-            className="bg-[#E6521F] text-white py-2 px-4 rounded hover:bg-[#EA2F14] transition-colors"
+            className="bg-[#E6521F] text-white py-2 px-4 rounded-full"
           >
             Join Now
           </a>
         </div>
       </section>
       <CountdownTimer />
-      <section id="about" className="max-w-3xl mx-auto px-4 py-8">
+      <section id="about" className="max-w-3xl mx-auto py-8 px-4">
         <h2 className="text-3xl font-bold mb-4">About the Event</h2>
-        <div className="flex flex-col sm:flex-row sm:space-x-4">
-          <p className="mb-4 sm:mb-0">
+        <div className="flex flex-col lg:flex-row lg:space-x-4">
+          <p className="mb-4 lg:mb-0">
             It's BBQ time, neighbors! Join us at 4 PM this Saturday at Oakview Park - Picnic Area B for a laid-back evening filled with music, food, and great company. We'll have a grill, a picnic setup, and a small stage for anyone who wants to perform. Whether you sing, dance, play guitar, or want to share a laugh, we'd love to see you shine!
           </p>
           <img
             src="https://content-media-cdn.codefinity.com/courses/125aa555-8e38-4918-bf19-386e1a021074/grill+and+chill.png"
             alt="Grill and Chill Event"
-            className="w-full sm:w-1/2"
+            className="w-full lg:w-1/2"
           />
         </div>
       </section>
@@ -594,34 +592,34 @@ import { CalendarClock, Flame, Mic, Rocket, Smile } from 'lucide-react';
 export default function ScheduleContent() {
   return (
     <section id="schedule" className="py-8 px-4">
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-6">Schedule</h2>
         <div className="border-l-4 border-orange-500 pl-4 space-y-6">
           <div className="flex items-center">
-            <CalendarClock className="w-5 h-5 text-[#EA2F14] mr-2" />
-            <h3 className="text-lg font-semibold">4:00 PM – Arrivals & Setup</h3>
+            <CalendarClock className="text-[#EA2F14] mr-2" />
+            <h3 className="text-xl font-semibold">4:00 PM – Arrivals & Setup</h3>
           </div>
-          <p>Grab a spot, meet your neighbors, and get comfy.</p>
+          <p className="text-base">Grab a spot, meet your neighbors, and get comfy.</p>
           <div className="flex items-center">
-            <Flame className="w-5 h-5 text-[#EA2F14] mr-2" />
-            <h3 className="text-lg font-semibold">4:30 PM – Grill Time</h3>
+            <Flame className="text-[#EA2F14] mr-2" />
+            <h3 className="text-xl font-semibold">4:30 PM – Grill Time</h3>
           </div>
-          <p>The BBQ is on! Hot dogs, veggies, and good smells all around.</p>
+          <p className="text-base">The BBQ is on! Hot dogs, veggies, and good smells all around.</p>
           <div className="flex items-center">
-            <Mic className="w-5 h-5 text-[#EA2F14] mr-2" />
-            <h3 className="text-lg font-semibold">5:00 PM – Open Stage & Performances</h3>
+            <Mic className="text-[#EA2F14] mr-2" />
+            <h3 className="text-xl font-semibold">5:00 PM – Open Stage & Performances</h3>
           </div>
-          <p>Music, poetry, magic, or a duet with Sara — hop on stage and shine!</p>
+          <p className="text-base">Music, poetry, magic, or a duet with Sara — hop on stage and shine!</p>
           <div className="flex items-center">
-            <Rocket className="w-5 h-5 text-[#EA2F14] mr-2" />
-            <h3 className="text-lg font-semibold">6:30 PM – Roller Showcase</h3>
+            <Rocket className="text-[#EA2F14] mr-2" />
+            <h3 className="text-xl font-semibold">6:30 PM – Roller Showcase</h3>
           </div>
-          <p>Look out for a surprise entrance!</p>
+          <p className="text-base">Look out for a surprise entrance!</p>
           <div className="flex items-center">
-            <Smile className="w-5 h-5 text-[#EA2F14] mr-2" />
-            <h3 className="text-lg font-semibold">7:00 PM – Chill & Hangout</h3>
+            <Smile className="text-[#EA2F14] mr-2" />
+            <h3 className="text-xl font-semibold">7:00 PM – Chill & Hangout</h3>
           </div>
-          <p>More food, more laughs, and lawn games till sunset.</p>
+          <p className="text-base">More food, more laughs, and lawn games till sunset.</p>
         </div>
       </div>
     </section>

@@ -10,10 +10,7 @@ export default function ContactForm() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,18 +32,18 @@ export default function ContactForm() {
         console.error("Form submission failed");
       }
     } catch (error) {
-      console.error("Error submitting form", error);
+      console.error("Error submitting form:", error);
     }
   };
 
   return (
     <section id="contact" className="py-8 px-4">
-      <div className="max-w-lg mx-auto bg-gray-100 p-6 rounded-lg shadow-md">
+      <div className="max-w-lg mx-auto">
         <h2 className="text-3xl font-bold text-center mb-6">Contact Us</h2>
         {submitted && (
           <p className="text-green-500 text-center mb-4">Thank you for your message!</p>
         )}
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg shadow-md space-y-4">
           <div>
             <label htmlFor="name" className="block font-semibold mb-2">
               Name

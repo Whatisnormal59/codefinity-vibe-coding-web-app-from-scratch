@@ -2,7 +2,7 @@ import { Instagram, Facebook, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-yellow-100 py-6 text-center">
+    <footer className="bg-orange-100 py-6 text-center">
       <p className="text-sm text-gray-500">© 2025 Grill & Chill. All rights reserved.</p>
       <p className="mt-4">Follow us:</p>
       <ul className="flex justify-center space-x-6 mt-2">
